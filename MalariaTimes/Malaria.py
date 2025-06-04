@@ -6,32 +6,37 @@ import math as mt
 from PIL import Image
 import csv
 
-# functions
+
+def CountryLstDetails(updateCountryLstDetails):
+    dat = open("MalariaTimes/dat.csv")
+    lst = csv.reader(dat)
+    updateCountryLstDetails["None"] = 0 
+    for i in lst:
+        updateCountryLstDetails[i[0]] = i[1:]
+
+
 def Find_Cases(country_tofind):
     if country_tofind == 'None':
                 pass
     else:
-        year = st.selectbox("Choose year",year_list[0:])
-        Index = year_list.index(year)
-        if Index == 0:
+        year = st.selectbox("Choose year",year_list[:])
+        index = year_list.index(year)
+        if index == 0:
             pass
         else:
-            with col3:
-                country_cases = countryLstDetails.get(country_tofind)
-                cases = mt.ceil(float(country_cases[Index-1]))
-                st.markdown(f"Around {cases} cases in {country_tofind.title()} during the year {year}.")
-                fig = px.line(x=year_list[1:],y=countryLstDetails.get(country_tofind),title="22 Years data from 2010 to 2021:",)
-                fig.update_layout(height=700, width = 700,xaxis_title="years",yaxis_title="Cases")
-                st.plotly_chart(fig)
+            country_cases = countryLstDetails.get(country_tofind)
+            cases = mt.ceil(float(country_cases[index-1]))
+            st.markdown(f"Around {cases} cases in {country_tofind.title()} during the year {year}.")
+            fig = px.line(x=year_list[1:],y=countryLstDetails.get(country_tofind),title="22 Years data from 2010 to 2021:",)
+            fig.update_layout(height=700, width = 700,xaxis_title="years",yaxis_title="Cases")
+            st.plotly_chart(fig)
 
 # 2021 census data
 nan = 0
-Data = open("MalariaTimes/dat.csv")
-lst = csv.reader(Data)
 countryLstDetails = {}
-countryLstDetails["None"] = 0 
-for temp in lst:
-    countryLstDetails[temp[0]] = temp[1:]
+CountryLstDetails(countryLstDetails)
+
+
 
 # List of Menu info
 # variables
