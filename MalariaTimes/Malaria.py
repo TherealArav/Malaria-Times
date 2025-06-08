@@ -2,18 +2,20 @@ import plotly.express as px
 import streamlit as st
 from streamlit_option_menu import option_menu
 import numpy as np
+import pandas as pd
 import math as mt
 from PIL import Image
-import csv
 
 
 def CountryLstDetails(updateCountryLstDetails):
-    dat = open("MalariaTimes/dat.csv")
-    lst = csv.reader(dat)
-    updateCountryLstDetails["None"] = 0 
-    for i in lst:
-        updateCountryLstDetails[i[0]] = i[1:]
 
+    df = pd.read_csv("MalariaTimes/dat.csv")
+    r,c = df.shape
+
+    updateCountryLstDetails["None"] = 0
+    for i in range(r):
+        dat = list(df.iloc[i])
+        updateCountryLstDetails[dat[0]] = dat[1:]
 
 def Find_Cases(country_tofind):
     if country_tofind == 'None':
@@ -32,6 +34,7 @@ def Find_Cases(country_tofind):
             st.plotly_chart(fig)
 
 # 2021 census data
+
 nan = 0
 countryLstDetails = {}
 CountryLstDetails(countryLstDetails)
@@ -54,10 +57,9 @@ with st.sidebar:
 )
 
 if selected == "Data chart representor":
-    with col1:
-        st.header("MALARIA CASES PLOTTER: ")
-        country = st.selectbox("Country",countryLstDetails.keys())
-        Find_Cases(country)
+    st.header("MALARIA CASES PLOTTER: ")
+    country = st.selectbox("Country",countryLstDetails.keys())
+    Find_Cases(country)
 # UI
 elif selected == "Malaria Prevention Programmes and Committees":
     st.markdown("Many committees and programs have played crucial roles in the global effort to eradicate malaria. Some of the leading organisations have been listed below:")

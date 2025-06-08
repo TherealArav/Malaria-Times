@@ -16,10 +16,6 @@
 # call(["python","Malaria.py"])
 
 
-def Change_X(x):
-    for i in range(10):
-        x[i] = i
-x = {}
-Change_X(x)
-print(x)
+
+
 
