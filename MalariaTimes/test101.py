@@ -1,4 +1,3 @@
-# libraries
 import mysql.connector as msc
 from subprocess import call
 
@@ -14,3 +13,8 @@ myCursor.execute(f"INSERT INTO USERNAMES VALUES('{userInput}','{passInput}');")
 myConnector.commit()
 myConnector.close()             
 call(["python","Malaria.py"])
+
+
+
+
+

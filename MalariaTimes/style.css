@@ -1,0 +1,10 @@
+.custom-text {
+  color: gold;
+  font-weight: bold;
+  font-style:normal;
+  border: 1px solid rgb(38 39 48);
+  background-color: rgb(38 39 48);
+  padding: 10px;
+  border-radius: 10px !important;
+  /* margin: 10px; */
+}
